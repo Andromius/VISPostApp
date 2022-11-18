@@ -104,7 +104,7 @@ namespace BACKEND.DomainObjects
             stringBuilder.Append("\n\tDate Dispatched: ").Append(DateDispatched.HasValue? $"{DateDispatched} " : "null ");
             stringBuilder.Append("\n\tDispatch Status: ").Append(DispatchStatus.HasValue? $"{DispatchStatus} " : "null ");
             stringBuilder.Append("\n\tSpecial Features: ").Append(SpecialFeatures == null ? "xyz " : "null ");
-            stringBuilder.Append($"\n\tAddressID: {Address.AddressID} ").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.CourierID : "null ");
+            stringBuilder.Append($"\n\tAddress: {Address.ToString()} ").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.CourierID : "null ");
             return stringBuilder.ToString();
         }
     }
