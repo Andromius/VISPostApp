@@ -12,7 +12,7 @@ namespace BACKEND.DataAccess
     public class PackageDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
-        
+        //MyFirstCommitKekw
         public PackageDataMapper() { }
         public Package FindByCode(int code) 
         {
