@@ -31,6 +31,7 @@ namespace BACKEND.DataAccess
                     }
                 }
             }
+            conn.Close();
             return null;
         }
 
