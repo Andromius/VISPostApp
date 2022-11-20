@@ -15,29 +15,29 @@ namespace BACKEND.DataAccess
         public AddressDataMapper() { }
         public Address FindByID(int id)
         {
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
-            using (SqlCommand command = new SqlCommand())
+            ConnectionManager.OpenConn(connectionString);
+            SqlCommand command = new SqlCommand();
+            command.Connection = ConnectionManager.SqlConnection;
+            command.CommandType = CommandType.Text;
+            command.CommandText = "SELECT* FROM Address2 WHERE address_id = @id";
+            command.Parameters.Add(new SqlParameter("@id", $"{id}"));
+            SqlDataReader dr = command.ExecuteReader();
+            while (dr.Read())
             {
-                command.Connection = conn;
-                command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT* FROM Address2 WHERE address_id = @id";
-                command.Parameters.Add(new SqlParameter("@id", $"{id}"));
-                using (SqlDataReader dr = command.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        return new Address
-                        (
-                            (int)dr["address_id"], 
-                            (string)dr["street"], 
-                            (int)dr["zip_code"], 
-                            new CityDataMapper().FindByID((int)dr["city_id"])
-                        );
-                    }
-                }
+                int address_id = (int)dr["address_id"];
+                string street = (string)dr["street"];
+                int zip_code = (int)dr["zip_code"];
+                int city_id = (int)dr["city_id"];
+                dr.Close();
+                command.Dispose();
+                City c = new CityDataMapper().FindByID(city_id);
+                Address addr = new Address(address_id, street, zip_code, c);
+                ConnectionManager.CloseConn();
+                return addr;
             }
-            conn.Close();
+            dr.Close();
+            command.Dispose();
+            ConnectionManager.CloseConn();
             return null;
         }
     }
