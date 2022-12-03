@@ -1,11 +1,11 @@
-﻿using BACKEND.DataAccess;
+﻿using DataAccess.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BACKEND.DomainObjects
+namespace DomainObjects.DomainObjects
 {
     public enum SpecialFeature
     { 
