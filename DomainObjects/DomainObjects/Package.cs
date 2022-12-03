@@ -1,5 +1,4 @@
-﻿using DataAccess.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -109,11 +108,11 @@ namespace DomainObjects.DomainObjects
             DateImported = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public void GetAddress()
-        {
-            if(Address is null)
-                Address = new AddressDataMapper().FindByID(AddressID);
-        }
+        //public void GetAddress()
+        //{
+        //    if(Address is null)
+        //        Address = new AddressDataMapper().FindByID(AddressID);
+        //}
 
         public override string ToString()
         {
