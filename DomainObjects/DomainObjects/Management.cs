@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BACKEND.DomainObjects
+namespace DomainObjects.DomainObjects
 {
     internal class Management : User
     {

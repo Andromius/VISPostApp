@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BACKEND.DataAccess
+namespace DataAccess.DataAccess
 {
     public class ConnectionManager
     {

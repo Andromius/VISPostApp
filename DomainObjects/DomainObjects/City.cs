@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BACKEND.DomainObjects
+namespace DomainObjects.DomainObjects
 {
     public class City
     {

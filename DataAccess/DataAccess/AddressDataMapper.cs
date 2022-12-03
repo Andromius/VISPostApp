@@ -1,5 +1,4 @@
-﻿using BACKEND.DomainObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BACKEND.DataAccess
+namespace DataAccess.DataAccess
 {
     public class AddressDataMapper
     {

@@ -5,9 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BACKEND.DomainObjects;
 
-namespace BACKEND.DataAccess
+namespace DataAccess.DataAccess
 {
     public class PackageDataMapper
     {
