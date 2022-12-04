@@ -7,14 +7,6 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.DomainObjects
 {
-    public enum SpecialFeature
-    { 
-        Fragile = 1,
-        OverSized = 2,
-        NNormShape = 3,
-        OverWeight = 4
-    }
-
     public enum EDispatchStatus
     { 
         Delivered,
@@ -115,11 +107,16 @@ namespace DomainObjects.DomainObjects
             DateImported = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public Address GetAddress(IAddressDataMapper addressDataMapper)
+        public void GetAddress(IAddressDataMapper addressDataMapper)
         {
             if (Address is null)
-                return Address = addressDataMapper.FindByID(AddressID);
-            return Address;
+                Address = addressDataMapper.FindByID(AddressID);
+        }
+
+        public void GetSpecialFeatures(ISpecialFeaturesDataMapper specialFeaturesDataMapper)
+        {
+            if(SpecialFeatures is null)
+                SpecialFeatures = specialFeaturesDataMapper.FindByPackageCode(PackageCode);
         }
 
         public override string ToString()
@@ -128,7 +125,16 @@ namespace DomainObjects.DomainObjects
             stringBuilder.Append($"\nPackage: {PackageCode} ").Append($"\n\tWeight: {Weight} ").Append($"\n\tDate Imported: {DateImported} ");
             stringBuilder.Append("\n\tDate Dispatched: ").Append(DateDispatched.HasValue ? $"{DateDispatched} " : "null ");
             stringBuilder.Append("\n\tDispatch Status: ").Append(DispatchStatus.HasValue ? $"{DispatchStatus} " : "null ");
-            stringBuilder.Append("\n\tSpecial Features: ").Append(SpecialFeatures == null ? "xyz " : "null ");
+            stringBuilder.Append("\n\tSpecial Features: ");
+            if (SpecialFeatures == null || SpecialFeatures.Count < 1)
+                stringBuilder.Append("null ");
+            else
+            {
+                foreach (var item in SpecialFeatures)
+                {
+                    stringBuilder.Append(item.Name).Append(" ");
+                }
+            }
             stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.CourierID : "null ");
             return stringBuilder.ToString();
         }

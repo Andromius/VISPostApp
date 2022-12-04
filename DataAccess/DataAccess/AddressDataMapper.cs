@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainObjects.DomainObjects;
+using DomainObjects.Services;
 
 namespace DataAccess.DataAccess
 {
-    public class AddressDataMapper
+    public class AddressDataMapper : IAddressDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         public AddressDataMapper() { }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.Services
 {
-    public interface ICourierDataMapper
+    public interface ISpecialFeaturesDataMapper
     {
-        public Courier FindByUserID(int id, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork);
+        public List<SpecialFeature> FindByPackageCode(int code);
     }
 }

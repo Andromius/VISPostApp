@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainObjects.DomainObjects;
+using DomainObjects.Services;
 
 namespace DataAccess.DataAccess
 {
-    public class PackageDataMapper
+    public class PackageDataMapper : IPackageDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         private readonly string SQL_SELECT_BY_COURIER = "SELECT* FROM Package WHERE courier_id = @id";

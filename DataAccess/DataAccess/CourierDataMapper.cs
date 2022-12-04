@@ -6,10 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainObjects.Services;
 
 namespace DataAccess.DataAccess
 {
-    public class CourierDataMapper
+    public class CourierDataMapper : ICourierDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         public Courier FindByUserID(int id, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork)

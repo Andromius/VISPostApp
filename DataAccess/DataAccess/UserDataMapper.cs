@@ -6,10 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainObjects.Services;
 
 namespace DataAccess.DataAccess
 {
-    public class UserDataMapper
+    public class UserDataMapper : IUserDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         private readonly string SQL_SELECT_BY_LOGIN = "SELECT* FROM \"User\" WHERE login = @login";
