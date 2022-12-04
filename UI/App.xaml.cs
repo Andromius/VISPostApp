@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccess.DataAccess;
+using DomainObjects.Services.AuthenticationServices;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +18,8 @@ namespace UI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            IAuthenticationService authentiCationService = new AuthenticationService(new UserDataMapper());
+            authentiCationService.Login("MaTl2011", "JsemTheBet");
             Window window = new MainWindow();
             window.DataContext = new MainViewModel();
             window.Show();

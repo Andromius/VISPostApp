@@ -13,7 +13,7 @@ namespace DomainObjects.DomainObjects
         public string LastName { get; private set; }
         public DateOnly DateHired { get; private set; }
         public string Login { get; private set; }
-        private string Password { get; set; }
+        public string Password { get; set; }
         public bool AtWork { get; private set; }
         protected User(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork)
         {

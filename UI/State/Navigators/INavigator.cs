@@ -9,9 +9,10 @@ using UI.ViewModels;
 namespace UI.State.Navigators
 {
     public enum ViewType
-    { 
+    {
+        Login,
         Home,
-        Packages
+        Packages,
     }
 
     public interface INavigator

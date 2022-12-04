@@ -18,6 +18,10 @@
             <DataTemplate DataType="{x:Type viewmodels:PackagesViewModel}">
                 <views:PackageView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
