@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainObjects.Services
+namespace DomainObjects.Services.AuthenticationServices
 {
-    public interface IAddressDataMapper
+    public interface IAuthenticationService
     {
-        public Address FindByID(int id);
+        User Login(string username, string password);
     }
 }

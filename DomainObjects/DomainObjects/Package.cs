@@ -17,7 +17,6 @@ namespace DomainObjects.DomainObjects
 
     public class Package
     {
-        private readonly IAddressDataMapper _addressDataMapper;
         public int PackageCode { get; }
         public double Weight { get; }
         public DateOnly DateImported { get; private set; }

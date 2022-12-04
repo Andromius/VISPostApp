@@ -59,36 +59,32 @@ namespace DataAccess.DataAccess
             ConnectionManager.CloseConn();
             return pckg;
         }
-    //    public List<Package> FindByCourierID(int id)
-    //    {
-    //        ConnectionManager.OpenConn(connectionString);
-    //        using (SqlCommand command = new SqlCommand())
-    //        {
-    //            command.Connection = conn;
-    //            command.CommandType = CommandType.Text;
-    //            command.CommandText = SQL_SELECT_BY_COURIER;
-    //            command.Parameters.Add(new SqlParameter("@id", $"{id}"));
-    //            List<Package> packages = new List<Package>();
-    //            using (SqlDataReader dr = command.ExecuteReader())
-    //            {
-    //                while (dr.Read())
-    //                {
-    //                    Package pckg = new Package(
-    //                        (int)dr["package_code"],
-    //                        (double)dr["weight"],
-    //                        DateOnly.FromDateTime((DateTime)dr["date_imported"]),
-    //                        new AddressDataMapper().FindByID((int)dr["address_id"])
-    //                    );
-    //                    packages.Add(pckg);
+        public List<Package> FindByCourierID(int id)
+        {
+            ConnectionManager.OpenConn(connectionString);
+            SqlCommand command = new SqlCommand();
+            command.Connection = ConnectionManager.SqlConnection;
+            command.CommandType = CommandType.Text;
+            command.CommandText = SQL_SELECT_BY_COURIER;
+            command.Parameters.Add(new SqlParameter("@id", $"{id}"));
+            List<Package> packages = new List<Package>();
+            SqlDataReader dr = command.ExecuteReader();
+            while (dr.Read())
+            {
+                Package pckg = new Package(
+                    (int)dr["package_code"],
+                    (double)dr["weight"],
+                    DateOnly.FromDateTime((DateTime)dr["date_imported"]),
+                    new AddressDataMapper().FindByID((int)dr["address_id"])
+                );
+                packages.Add(pckg);
+            }
 
-    //                }
-    //                conn.Close();
-    //                return packages;
-    //            }
-    //        }
-    //        conn.Close();
-    //        return new List<Package>();
-    //    }
+            dr.Close();
+            command.Dispose();
+            ConnectionManager.CloseConn();
+            return new List<Package>();
+        }
 
     }
 }
