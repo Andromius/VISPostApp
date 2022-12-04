@@ -9,9 +9,10 @@ namespace DomainObjects.DomainObjects
 {
     public enum SpecialFeature
     { 
-        Fragile,
-        Expensive,
-        NStdShape
+        Fragile = 1,
+        OverSized = 2,
+        NNormShape = 3,
+        OverWeight = 4
     }
 
     public enum EDispatchStatus
@@ -32,7 +33,7 @@ namespace DomainObjects.DomainObjects
         public List<SpecialFeature>? SpecialFeatures { get; private set; }
         public int AddressID { get; private set; }
         public Address? Address { get; private set; }
-        public int CourierID { get; set; }
+        public int? CourierID { get; set; }
         public Courier? Courier { get; set; }
 
         public Package(int packageCode, double weight, DateOnly dateImported, Address address)
@@ -45,7 +46,7 @@ namespace DomainObjects.DomainObjects
             SpecialFeatures = new List<SpecialFeature>();
         }
 
-        public Package(int packageCode, double weight, DateOnly dateImported, DateOnly? dateDispatched, EDispatchStatus? dispatchStatus, List<SpecialFeature>? specialFeatures, int addressID, Address? address = null, int courierID, Courier? courier = null)
+        public Package(int packageCode, double weight, DateOnly dateImported, DateOnly? dateDispatched, EDispatchStatus? dispatchStatus, int addressID, int? courierID = null, List<SpecialFeature>? specialFeatures = null, Address? address = null, Courier? courier = null)
         {
             PackageCode = packageCode;
             Weight = weight;

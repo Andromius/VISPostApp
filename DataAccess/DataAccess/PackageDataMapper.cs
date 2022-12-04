@@ -27,54 +27,58 @@ namespace DataAccess.DataAccess
             Package pckg = null;
             while (dr.Read())
             {
-                pckg = new Package((int)dr["package_code"], (double)dr["weight"],)
-                int package_code = (int)dr["package_code"];
-                double weight = (double)dr["weight"];
-                DateOnly date_imported = DateOnly.FromDateTime((DateTime)dr["date_imported"]);
-                int address_id = (int)dr["address_id"];
-                dr.Close();
-                command.Dispose();
-                Address addr = new AddressDataMapper().FindByID(address_id);
-                pckg = new Package(package_code, weight, date_imported, addr);
-                ConnectionManager.CloseConn();
-                return pckg;
+                DateOnly? dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
+                EDispatchStatus? dispatchStatus;
+                switch ((string)dr["dispatch_status"])
+                {
+                    case "delivered":
+                        dispatchStatus = EDispatchStatus.Delivered; break;
+                    case "ndelivered":
+                        dispatchStatus = EDispatchStatus.NDelivered; break;
+                    case "dispatched":
+                        dispatchStatus = EDispatchStatus.Dispatched; break;
+                    case "returned":
+                        dispatchStatus = EDispatchStatus.Returned; break;
+                    default:
+                        dispatchStatus = null; break;
+                }
+                pckg = new Package((int)dr["package_code"], (double)dr["weight"], DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], (int)dr["courier_id"]);
             }
             dr.Close();
             command.Dispose();
             ConnectionManager.CloseConn();
-            return null;
+            return pckg;
         }
-        public List<Package> FindByCourierID(int id)
-        {
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
-            using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = conn;
-                command.CommandType = CommandType.Text;
-                command.CommandText = SQL_SELECT_BY_COURIER;
-                command.Parameters.Add(new SqlParameter("@id", $"{id}"));
-                List<Package> packages = new List<Package>();
-                using (SqlDataReader dr = command.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        Package pckg = new Package(
-                            (int)dr["package_code"],
-                            (double)dr["weight"],
-                            DateOnly.FromDateTime((DateTime)dr["date_imported"]),
-                            new AddressDataMapper().FindByID((int)dr["address_id"])
-                        );
-                        packages.Add(pckg);
+    //    public List<Package> FindByCourierID(int id)
+    //    {
+    //        ConnectionManager.OpenConn(connectionString);
+    //        using (SqlCommand command = new SqlCommand())
+    //        {
+    //            command.Connection = conn;
+    //            command.CommandType = CommandType.Text;
+    //            command.CommandText = SQL_SELECT_BY_COURIER;
+    //            command.Parameters.Add(new SqlParameter("@id", $"{id}"));
+    //            List<Package> packages = new List<Package>();
+    //            using (SqlDataReader dr = command.ExecuteReader())
+    //            {
+    //                while (dr.Read())
+    //                {
+    //                    Package pckg = new Package(
+    //                        (int)dr["package_code"],
+    //                        (double)dr["weight"],
+    //                        DateOnly.FromDateTime((DateTime)dr["date_imported"]),
+    //                        new AddressDataMapper().FindByID((int)dr["address_id"])
+    //                    );
+    //                    packages.Add(pckg);
 
-                    }
-                    conn.Close();
-                    return packages;
-                }
-            }
-            conn.Close();
-            return new List<Package>();
-        }
+    //                }
+    //                conn.Close();
+    //                return packages;
+    //            }
+    //        }
+    //        conn.Close();
+    //        return new List<Package>();
+    //    }
 
-    }
+    //}
 }
