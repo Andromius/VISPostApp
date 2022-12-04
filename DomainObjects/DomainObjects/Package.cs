@@ -32,17 +32,8 @@ namespace DomainObjects.DomainObjects
         public List<SpecialFeature>? SpecialFeatures { get; private set; }
         public int AddressID { get; private set; }
         public Address? Address { get; private set; }
+        public int CourierID { get; set; }
         public Courier? Courier { get; set; }
-
-        public Package(int packageCode, double weight, DateOnly dateImported, int addressID)
-        {
-            PackageCode = packageCode;
-            Weight = weight;
-            DateImported = dateImported;
-            AddressID = addressID;
-            Address = null;
-            SpecialFeatures = new List<SpecialFeature>();
-        }
 
         public Package(int packageCode, double weight, DateOnly dateImported, Address address)
         {
@@ -52,6 +43,20 @@ namespace DomainObjects.DomainObjects
             AddressID = address.AddressID;
             Address = address;
             SpecialFeatures = new List<SpecialFeature>();
+        }
+
+        public Package(int packageCode, double weight, DateOnly dateImported, DateOnly? dateDispatched, EDispatchStatus? dispatchStatus, List<SpecialFeature>? specialFeatures, int addressID, Address? address = null, int courierID, Courier? courier = null)
+        {
+            PackageCode = packageCode;
+            Weight = weight;
+            DateImported = dateImported;
+            DateDispatched = dateDispatched;
+            DispatchStatus = dispatchStatus;
+            SpecialFeatures = specialFeatures;
+            AddressID = addressID;
+            Address = address;
+            CourierID = courierID;
+            Courier = courier;
         }
 
         public void SetDelivered()
@@ -109,10 +114,11 @@ namespace DomainObjects.DomainObjects
             DateImported = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public void GetAddress(IAddressDataMapper addressDataMapper)
+        public Address GetAddress(IAddressDataMapper addressDataMapper)
         {
             if (Address is null)
-                Address = addressDataMapper.FindByID(AddressID);
+                return Address = addressDataMapper.FindByID(AddressID);
+            return Address;
         }
 
         public override string ToString()

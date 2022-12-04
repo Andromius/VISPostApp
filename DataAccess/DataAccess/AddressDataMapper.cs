@@ -19,7 +19,7 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT* FROM Address2 WHERE address_id = @id";
+            command.CommandText = "SELECT* FROM Address WHERE address_id = @id";
             command.Parameters.Add(new SqlParameter("@id", $"{id}"));
             SqlDataReader dr = command.ExecuteReader();
             while (dr.Read())

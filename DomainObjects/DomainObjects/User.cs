@@ -15,5 +15,15 @@ namespace DomainObjects.DomainObjects
         public string Login { get; private set; }
         private string Password { get; set; }
         public bool AtWork { get; private set; }
+        protected User(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork)
+        {
+            UserID = userID;
+            FirstName = firstName;
+            LastName = lastName;
+            DateHired = dateHired;
+            Login = login;
+            Password = password;
+            AtWork = atWork;
+        }
     }
 }

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.DomainObjects
 {
-    internal class Warehouseman : User
+    public class Warehouseman : User
     {
+        public Warehouseman(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork) : base(userID, firstName, lastName, dateHired, login, password, atWork)
+        {
+        }
     }
 }

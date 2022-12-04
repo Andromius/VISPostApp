@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainObjects.DomainObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace DomainObjects.Services
 {
     public interface IAreaDataMapper
     {
+        public Area FindByID(int id);
     }
 }

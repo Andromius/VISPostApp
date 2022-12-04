@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DomainObjects.Services
-{
+{   
     public interface IAddressDataMapper
     {
         public Address FindByID(int id);

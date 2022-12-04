@@ -25,6 +25,7 @@ namespace DataAccess.DataAccess
         {
             if (!IsConnected) { Console.WriteLine($"CC IF: {IsConnected}"); return; }
             SqlConnection.Close();
+            SqlConnection.Dispose();
             IsConnected = false;
             Console.WriteLine($"CC: {IsConnected}");
         }

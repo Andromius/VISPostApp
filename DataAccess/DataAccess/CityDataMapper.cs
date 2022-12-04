@@ -19,7 +19,7 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT* FROM City2 WHERE city_id = @id";
+            command.CommandText = "SELECT* FROM City WHERE city_id = @id";
             command.Parameters.Add(new SqlParameter("@id", $"{id}"));
             SqlDataReader dr = command.ExecuteReader();
             while (dr.Read())
@@ -42,7 +42,7 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT* FROM City2 WHERE name = @name";
+            command.CommandText = "SELECT* FROM City WHERE name = @name";
             command.Parameters.Add(new SqlParameter("@name", $"{name}"));
             SqlDataReader dr = command.ExecuteReader();
             while (dr.Read())
@@ -65,7 +65,7 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT* FROM City2 WHERE area_id = @id";
+            command.CommandText = "SELECT* FROM City WHERE area_id = @id";
             command.Parameters.Add(new SqlParameter("@id", $"{areaId}"));
             SqlDataReader dr = command.ExecuteReader();
             while (dr.Read())
@@ -84,7 +84,7 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "UPDATE City2 SET name = @name, area_id = @areaID WHERE city_id = @id";
+            command.CommandText = "UPDATE City SET name = @name, area_id = @areaID WHERE city_id = @id";
             command.Parameters.Add(new SqlParameter("@id", $"{city.CityID}"));
             command.Parameters.Add(new SqlParameter("@name", $"{city.Name}"));
             command.Parameters.Add(new SqlParameter("@areaID", $"{city.AreaID}"));
@@ -101,11 +101,11 @@ namespace DataAccess.DataAccess
             SqlCommand command = new SqlCommand();
             command.Connection = ConnectionManager.SqlConnection;
             command.CommandType = CommandType.Text;
-            command.CommandText = "INSERT INTO City2 (name) VALUES (@name)";
+            command.CommandText = "INSERT INTO City (name) VALUES (@name)";
             command.Parameters.Add(new SqlParameter("@name", $"{city.Name}"));
             if (city.AreaID is not null)
             {
-                command.CommandText = "INSERT INTO City2 (name, area_id) VALUES (@name, @areaID)";
+                command.CommandText = "INSERT INTO City (name, area_id) VALUES (@name, @areaID)";
                 command.Parameters.Add(new SqlParameter("@areaID", $"{city.AreaID}"));
             }
             try
