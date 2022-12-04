@@ -50,13 +50,13 @@ namespace DataAccess.DataAccess
             ConnectionManager.CloseConn();
             return null;
         }
-        public bool Update(User user)
-        {
+        //public bool Update(User user)
+        //{
 
-        }
-        public bool Create(User user)
-        {
+        //}
+        //public bool Create(User user)
+        //{
 
-        }
+        //}
     }
 }

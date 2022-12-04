@@ -27,22 +27,31 @@ namespace DataAccess.DataAccess
             Package pckg = null;
             while (dr.Read())
             {
-                DateOnly? dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
+                DateOnly? dateDispacthed;
+                if (dr.IsDBNull(3))
+                    dateDispacthed = null;
+                else
+                    dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
                 EDispatchStatus? dispatchStatus;
-                switch ((string)dr["dispatch_status"])
-                {
-                    case "delivered":
-                        dispatchStatus = EDispatchStatus.Delivered; break;
-                    case "ndelivered":
-                        dispatchStatus = EDispatchStatus.NDelivered; break;
-                    case "dispatched":
-                        dispatchStatus = EDispatchStatus.Dispatched; break;
-                    case "returned":
-                        dispatchStatus = EDispatchStatus.Returned; break;
-                    default:
-                        dispatchStatus = null; break;
-                }
-                pckg = new Package((int)dr["package_code"], (double)dr["weight"], DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], (int)dr["courier_id"]);
+                    switch ((string)dr["dispatch_status"])
+                    {
+                        case "delivered":
+                            dispatchStatus = EDispatchStatus.Delivered; break;
+                        case "ndelivered":
+                            dispatchStatus = EDispatchStatus.NDelivered; break;
+                        case "dispatched":
+                            dispatchStatus = EDispatchStatus.Dispatched; break;
+                        case "returned":
+                            dispatchStatus = EDispatchStatus.Returned; break;
+                        default:
+                            dispatchStatus = null; break;
+                    }
+                int? courierID;
+                if (dr.IsDBNull(6))
+                    courierID = null;
+                else
+                    courierID = (int)dr["courier_id"];
+                pckg = new Package((int)dr["package_code"], Convert.ToDouble((decimal)dr["weight"]), DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], courierID);
             }
             dr.Close();
             command.Dispose();
@@ -80,5 +89,5 @@ namespace DataAccess.DataAccess
     //        return new List<Package>();
     //    }
 
-    //}
+    }
 }
