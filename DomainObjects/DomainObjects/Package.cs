@@ -17,16 +17,17 @@ namespace DomainObjects.DomainObjects
 
     public class Package
     {
+        private readonly IAddressDataMapper _addressDataMapper;
         public int PackageCode { get; }
         public double Weight { get; }
         public DateOnly DateImported { get; private set; }
         public DateOnly? DateDispatched { get; private set; }
         public EDispatchStatus? DispatchStatus { get; private set; }
         public List<SpecialFeature>? SpecialFeatures { get; private set; }
-        public int AddressID { get; private set; }
-        public Address? Address { get; private set; }
-        public int? CourierID { get; set; }
-        public Courier? Courier { get; set; }
+        private int AddressID { get; set; }
+        private Address? Address { get; set; }
+        private int? CourierID { get; set; }
+        public Courier? Courier { private get; set; }
 
         public Package(int packageCode, double weight, DateOnly dateImported, Address address)
         {
@@ -107,16 +108,25 @@ namespace DomainObjects.DomainObjects
             DateImported = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public void GetAddress(IAddressDataMapper addressDataMapper)
+        public Address GetAddress(IAddressDataMapper addressDataMapper)
         {
             if (Address is null)
-                Address = addressDataMapper.FindByID(AddressID);
+                return Address = addressDataMapper.FindByID(AddressID);
+            return Address;
         }
 
-        public void GetSpecialFeatures(ISpecialFeaturesDataMapper specialFeaturesDataMapper)
+        public List<SpecialFeature> GetSpecialFeatures(ISpecialFeaturesDataMapper specialFeaturesDataMapper)
         {
             if(SpecialFeatures is null)
-                SpecialFeatures = specialFeaturesDataMapper.FindByPackageCode(PackageCode);
+                return SpecialFeatures = specialFeaturesDataMapper.FindByPackageCode(PackageCode);
+            return SpecialFeatures;
+        }
+
+        public Courier GetCourier(ICourierDataMapper courierDataMapper)
+        {
+            if (Courier is null && CourierID is not null)
+                return Courier = courierDataMapper.FindByCourierID(CourierID.Value);
+            return Courier;
         }
 
         public override string ToString()
@@ -135,7 +145,7 @@ namespace DomainObjects.DomainObjects
                     stringBuilder.Append(item.Name).Append(" ");
                 }
             }
-            stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.CourierID : "null ");
+            stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.FirstName : "null ");
             return stringBuilder.ToString();
         }
     }

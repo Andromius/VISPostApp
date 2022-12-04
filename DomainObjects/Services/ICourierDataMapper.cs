@@ -9,6 +9,7 @@ namespace DomainObjects.Services
 {
     public interface ICourierDataMapper
     {
-        public Courier FindByUserID(int id, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork);
+        public Courier FindByUserID(Courier c);
+        public Courier FindByCourierID(int id);
     }
 }

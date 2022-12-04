@@ -7,12 +7,12 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Package p = new PackageDataMapper().FindByCode(10274908);
+            Package p = new PackageDataMapper().FindByCode(10566576);
+            p.GetCourier(new CourierDataMapper());
             Console.WriteLine(p);
-            p.GetAddress(new AddressDataMapper());
-            Console.WriteLine(p);
-            p.GetSpecialFeatures(new SpecialFeaturesDataMapper());
-            Console.WriteLine(p);
+            //p.GetSpecialFeatures(new SpecialFeaturesDataMapper());
+            //Console.WriteLine(p);
+            //p.Address
         }
     }
 }

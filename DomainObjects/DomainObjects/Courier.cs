@@ -9,12 +9,12 @@ namespace DomainObjects.DomainObjects
 {
     public class Courier : User
     {
-        public int CourierID { get; }
-        public int AreaID { get; }
+        public int? CourierID { get; set; }
+        public int? AreaID { get; set; }
         public Area? AssignedArea { get; private set; }
         public List<Package> Packages { get; private set; }
 
-        public Courier(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork, int courierID, int areaID) : base(userID, firstName, lastName, dateHired, login, password, atWork)
+        public Courier(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork, int? courierID = null, int? areaID = null) : base(userID, firstName, lastName, dateHired, login, password, atWork)
         {
             CourierID = courierID;
             AreaID = areaID;
@@ -36,7 +36,7 @@ namespace DomainObjects.DomainObjects
 
         public void GetArea(IAreaDataMapper areaDataMapper)
         {
-            AssignedArea = areaDataMapper.FindByID(AreaID);
+            AssignedArea = areaDataMapper.FindByID(AreaID.Value);
         }
     }
 }
