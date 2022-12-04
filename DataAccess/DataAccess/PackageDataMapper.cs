@@ -9,11 +9,11 @@ using DomainObjects.DomainObjects;
 
 namespace DataAccess.DataAccess
 {
-    public class PackageDataMapper
+    public class PackageDataMapper : IPackageDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         public PackageDataMapper() { }
-        public Package FindByCode(int code) 
+        public IPackage FindByCode(int code)
         {
             ConnectionManager.OpenConn(connectionString);
             SqlCommand command = new SqlCommand();
@@ -62,7 +62,7 @@ namespace DataAccess.DataAccess
         //                    (double)dr["weight"],
         //                    DateOnly.FromDateTime((DateTime)dr["date_imported"]),
         //                    new AddressDataMapper().FindByID((int)dr["address_id"]));
-                        
+
         //            }
         //            conn.Close();
         //            return pckg;

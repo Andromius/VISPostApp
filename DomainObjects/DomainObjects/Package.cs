@@ -21,7 +21,7 @@ namespace DomainObjects.DomainObjects
         Dispatched
     }
 
-    public class Package
+    public class Package : IPackage
     {
         public int PackageCode { get; }
         public double Weight { get; }
@@ -108,18 +108,18 @@ namespace DomainObjects.DomainObjects
             DateImported = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        //public void GetAddress()
-        //{
-        //    if(Address is null)
-        //        Address = new AddressDataMapper().FindByID(AddressID);
-        //}
+        public void GetAddress()
+        {
+            if (Address is null)
+                Address = new MapperFactory();
+        }
 
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append($"\nPackage: {PackageCode} ").Append($"\n\tWeight: {Weight} ").Append($"\n\tDate Imported: {DateImported} ");
-            stringBuilder.Append("\n\tDate Dispatched: ").Append(DateDispatched.HasValue? $"{DateDispatched} " : "null ");
-            stringBuilder.Append("\n\tDispatch Status: ").Append(DispatchStatus.HasValue? $"{DispatchStatus} " : "null ");
+            stringBuilder.Append("\n\tDate Dispatched: ").Append(DateDispatched.HasValue ? $"{DateDispatched} " : "null ");
+            stringBuilder.Append("\n\tDispatch Status: ").Append(DispatchStatus.HasValue ? $"{DispatchStatus} " : "null ");
             stringBuilder.Append("\n\tSpecial Features: ").Append(SpecialFeatures == null ? "xyz " : "null ");
             stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.CourierID : "null ");
             return stringBuilder.ToString();

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.DomainObjects
 {
-    public class Address
+    public class Address : IAddress
     {
         public int AddressID { get; set; }
         public string Street { get; set; }
         public int ZipCode { get; set; }
         public City City { get; set; }
-        public Address(int id, string street, int zipCode, City city) 
-        { 
+        public Address(int id, string street, int zipCode, City city)
+        {
             AddressID = id;
             Street = street;
             ZipCode = zipCode;
