@@ -9,7 +9,7 @@ using DomainObjects.DomainObjects;
 
 namespace DataAccess.DataAccess
 {
-    public class AddressDataMapper : IAddressDataMapper
+    public class AddressDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         public AddressDataMapper() { }

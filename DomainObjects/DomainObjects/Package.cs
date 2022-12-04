@@ -21,7 +21,7 @@ namespace DomainObjects.DomainObjects
         Dispatched
     }
 
-    public class Package : IPackage
+    public class Package
     {
         public int PackageCode { get; }
         public double Weight { get; }

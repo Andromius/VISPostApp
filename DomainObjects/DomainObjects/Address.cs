@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.DomainObjects
 {
-    public class Address : IAddress
+    public class Address
     {
         public int AddressID { get; set; }
         public string Street { get; set; }

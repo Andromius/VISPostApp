@@ -9,11 +9,11 @@ using DomainObjects.DomainObjects;
 
 namespace DataAccess.DataAccess
 {
-    public class PackageDataMapper : IPackageDataMapper
+    public class PackageDataMapper
     {
         private readonly string connectionString = @"Data Source=dbsys.cs.vsb.cz\STUDENT;Initial Catalog=SCH0388;User ID=SCH0388;Password=wNsuzm209RYFy135";
         public PackageDataMapper() { }
-        public IPackage FindByCode(int code)
+        public Package FindByCode(int code)
         {
             ConnectionManager.OpenConn(connectionString);
             SqlCommand command = new SqlCommand();

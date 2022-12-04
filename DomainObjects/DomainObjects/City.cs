@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DomainObjects.DomainObjects
 {
-    public class City : ICity
+    public class City
     {
         public int? CityID { get; set; }
         public int? AreaID { get; set; }
