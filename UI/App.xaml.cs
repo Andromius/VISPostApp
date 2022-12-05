@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UI.State.Navigators;
 using UI.ViewModels;
 
 namespace UI
@@ -20,7 +21,7 @@ namespace UI
         protected override void OnStartup(StartupEventArgs e)
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
-            IAuthenticationService authenticationService = serviceProvider.GetService<IAuthenticationService>();
+            //IAuthenticationService authenticationService = serviceProvider.GetService<IAuthenticationService>();
             //IAuthenticationService authentiCationService = new AuthenticationService(new UserDataMapper());
             //authentiCationService.Login("MaTl2011", "JsemTheBet");
             Window window = new MainWindow();
@@ -37,6 +38,7 @@ namespace UI
             services.AddSingleton<UserDataMapper>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
+            services.AddScoped<INavigator, Navigator>();
             services.AddScoped<MainViewModel>();
 
             return services.BuildServiceProvider();

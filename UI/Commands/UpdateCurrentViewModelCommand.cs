@@ -38,9 +38,9 @@ namespace UI.Commands
                     case ViewType.Packages:
                         _navigator.CurrentViewModel = new PackagesViewModel();
                         break;
-                    case ViewType.Login:
-                        _navigator.CurrentViewModel = new LoginViewModel();
-                        break;
+                    //case ViewType.Login:
+                    //    _navigator.CurrentViewModel = new LoginViewModel();
+                    //    break;
                     default:
                         break;
                 }
