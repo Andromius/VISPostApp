@@ -15,7 +15,11 @@ namespace ConsoleApp1
         {
             Package p = new PackageDataMapper().FindByCode(10566576);
             Console.WriteLine(p);
-            p.GetAddress(new AddressDataMapper());
+            //p.GetAddress(new AddressDataMapper());
+            Courier c = new CourierDataMapper().FindByCourierID(1);
+            Console.WriteLine(c);
+            c.GetArea(new AreaDataMapper());
+            Console.WriteLine(c);
             //p.GetCourier(new CourierDataMapper());
             //Console.WriteLine(p);
             //IPasswordHasher passwordHasher = new PasswordHasher();

@@ -19,11 +19,14 @@ namespace UI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            IAuthenticationService authentiCationService = new AuthenticationService(new UserDataMapper());
-            authentiCationService.Login("MaTl2011", "JsemTheBet");
+            IServiceProvider serviceProvider = CreateServiceProvider();
+            IAuthenticationService authenticationService = serviceProvider.GetService<IAuthenticationService>();
+            //IAuthenticationService authentiCationService = new AuthenticationService(new UserDataMapper());
+            //authentiCationService.Login("MaTl2011", "JsemTheBet");
             Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
             window.Show();
+
             base.OnStartup(e);
         }
 
@@ -31,6 +34,12 @@ namespace UI
         {
             IServiceCollection services = new ServiceCollection();
 
+            services.AddSingleton<UserDataMapper>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
+            services.AddScoped<MainViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }

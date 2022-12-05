@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainObjects.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,13 @@ namespace DomainObjects.DomainObjects
         //    AreaID = area.AreaID;
         //    Area = area;
         //}
+
+        public Area GetArea(IAreaDataMapper areaDataMapper)
+        {
+            if (Area is null)
+                return Area = areaDataMapper.FindByID(AreaID.Value);
+            return Area;
+        }
 
         public override string ToString()
         {

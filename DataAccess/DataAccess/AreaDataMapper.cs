@@ -26,7 +26,7 @@ namespace DataAccess.DataAccess
             Area a = null;
             while (dr.Read())
             {
-                a = new Area((int)dr["area_id"], (string)dr["name"]);
+                a = new Area((int)dr["area_id"], (string)dr["area_name"]);
             }
             dr.Close();
             command.Dispose();

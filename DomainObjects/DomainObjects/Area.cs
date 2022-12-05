@@ -15,5 +15,13 @@ namespace DomainObjects.DomainObjects
             AreaID = areaID;
             Name = name;
         }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"AreaID: {AreaID}");
+            stringBuilder.AppendLine($"Name: {Name}");
+            return stringBuilder.ToString(); 
+        }
     }
 }

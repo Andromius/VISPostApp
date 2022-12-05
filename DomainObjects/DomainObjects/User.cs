@@ -25,5 +25,14 @@ namespace DomainObjects.DomainObjects
             Password = password;
             AtWork = atWork;
         }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"UserID: {UserID}");
+            stringBuilder.AppendLine($"Name {FirstName} {LastName}");
+            stringBuilder.AppendLine($"Date hired: {DateHired}");
+            return stringBuilder.ToString();
+        }
     }
 }

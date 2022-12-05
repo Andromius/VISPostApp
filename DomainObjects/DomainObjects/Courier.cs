@@ -11,7 +11,7 @@ namespace DomainObjects.DomainObjects
     {
         public int? CourierID { get; set; }
         public int? AreaID { get; set; }
-        public Area? AssignedArea { get; private set; }
+        private Area? AssignedArea { get; set; }
         public List<Package> Packages { get; private set; }
 
         public Courier(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork, int? courierID = null, int? areaID = null) : base(userID, firstName, lastName, dateHired, login, password, atWork)
@@ -34,9 +34,21 @@ namespace DomainObjects.DomainObjects
             Packages.Add(p);
         }
 
-        public void GetArea(IAreaDataMapper areaDataMapper)
+        public Area GetArea(IAreaDataMapper areaDataMapper)
         {
-            AssignedArea = areaDataMapper.FindByID(AreaID.Value);
+            if (AssignedArea is null)
+                return AssignedArea = areaDataMapper.FindByID(AreaID.Value);
+            return AssignedArea;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"Role: {nameof(Courier)}");
+            stringBuilder.AppendLine($"CourierID: {CourierID}");
+            stringBuilder.AppendLine($"Packages amm: {Packages.Count}");
+            stringBuilder.AppendLine(AssignedArea is null ? $"Area: {AreaID}" : $"Area: {AssignedArea}");
+            return base.ToString() + stringBuilder.ToString();
         }
     }
 }
