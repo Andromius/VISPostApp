@@ -14,14 +14,16 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Package p = new PackageDataMapper().FindByCode(10566576);
-            p.GetCourier(new CourierDataMapper());
             Console.WriteLine(p);
-            IPasswordHasher passwordHasher = new PasswordHasher();
-            Console.WriteLine(passwordHasher.HashPassword("nejvicPOG"));
-            string hash = "AC91tuQ6qisjedewvBHEHjTQwJksMTqPwJl/KGt8WuSThPUpKt8Ioe1ZwgmGXhZTkw==";
-            PasswordVerificationResult res = passwordHasher.VerifyHashedPassword(hash, "abc123");
-            Console.WriteLine(res);
-            Console.WriteLine(hash.Length);
+            p.GetAddress(new AddressDataMapper());
+            //p.GetCourier(new CourierDataMapper());
+            //Console.WriteLine(p);
+            //IPasswordHasher passwordHasher = new PasswordHasher();
+            //Console.WriteLine(passwordHasher.HashPassword("nejvicPOG"));
+            //string hash = "AC91tuQ6qisjedewvBHEHjTQwJksMTqPwJl/KGt8WuSThPUpKt8Ioe1ZwgmGXhZTkw==";
+            //PasswordVerificationResult res = passwordHasher.VerifyHashedPassword(hash, "abc123");
+            //Console.WriteLine(res);
+            //Console.WriteLine(hash.Length);
             //p.GetSpecialFeatures(new SpecialFeaturesDataMapper());
             //Console.WriteLine(p);
             //p.Address

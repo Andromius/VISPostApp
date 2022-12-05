@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainObjects.DomainObjects;
 using DomainObjects.Services;
+using DataAccess.IdentityMaps;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DataAccess.DataAccess
 {
@@ -18,22 +20,28 @@ namespace DataAccess.DataAccess
         public PackageDataMapper() { }
         public Package FindByCode(int code)
         {
-            ConnectionManager.OpenConn(connectionString);
-            SqlCommand command = new SqlCommand();
-            command.Connection = ConnectionManager.SqlConnection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = SQL_SELECT_BY_PCKGCODE;
-            command.Parameters.Add(new SqlParameter("@code", $"{code}"));
-            SqlDataReader dr = command.ExecuteReader();
-            Package pckg = null;
-            while (dr.Read())
+            try
             {
-                DateOnly? dateDispacthed;
-                if (dr.IsDBNull(3))
-                    dateDispacthed = null;
-                else
-                    dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
-                EDispatchStatus? dispatchStatus;
+                return PackageIdentityMap.Get(code);
+            }
+            catch (KeyNotFoundException)
+            {
+                ConnectionManager.OpenConn(connectionString);
+                SqlCommand command = new SqlCommand();
+                command.Connection = ConnectionManager.SqlConnection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SQL_SELECT_BY_PCKGCODE;
+                command.Parameters.Add(new SqlParameter("@code", $"{code}"));
+                SqlDataReader dr = command.ExecuteReader();
+                Package pckg = null;
+                while (dr.Read())
+                {
+                    DateOnly? dateDispacthed;
+                    if (dr.IsDBNull(3))
+                        dateDispacthed = null;
+                    else
+                        dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
+                    EDispatchStatus? dispatchStatus;
                     switch ((string)dr["dispatch_status"])
                     {
                         case "delivered":
@@ -47,17 +55,19 @@ namespace DataAccess.DataAccess
                         default:
                             dispatchStatus = null; break;
                     }
-                int? courierID;
-                if (dr.IsDBNull(6))
-                    courierID = null;
-                else
-                    courierID = (int)dr["courier_id"];
-                pckg = new Package((int)dr["package_code"], Convert.ToDouble((decimal)dr["weight"]), DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], courierID);
+                    int? courierID;
+                    if (dr.IsDBNull(6))
+                        courierID = null;
+                    else
+                        courierID = (int)dr["courier_id"];
+                    pckg = new Package((int)dr["package_code"], Convert.ToDouble((decimal)dr["weight"]), DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], courierID);
+                    PackageIdentityMap.Insert(pckg);
+                }
+                dr.Close();
+                command.Dispose();
+                ConnectionManager.CloseConn();
+                return pckg;
             }
-            dr.Close();
-            command.Dispose();
-            ConnectionManager.CloseConn();
-            return pckg;
         }
         public List<Package> FindByCourierID(int id)
         {

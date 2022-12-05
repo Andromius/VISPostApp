@@ -23,18 +23,15 @@ namespace DataAccess.DataAccess
             command.CommandText = "SELECT* FROM City WHERE city_id = @id";
             command.Parameters.Add(new SqlParameter("@id", $"{id}"));
             SqlDataReader dr = command.ExecuteReader();
+            City c = null;
             while (dr.Read())
             {
-                City c = new City((int)dr["city_id"], (string)dr["name"], (int)dr["area_id"]);
-                dr.Close();
-                command.Dispose();
-                ConnectionManager.CloseConn();
-                return c;
+                c = new City((int)dr["city_id"], (string)dr["name"], (int)dr["area_id"]);
             }
             dr.Close();
             command.Dispose();
             ConnectionManager.CloseConn();
-            return null;
+            return c;
         }
 
         public City FindByName(string name)

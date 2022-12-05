@@ -1,5 +1,6 @@
 ﻿using DataAccess.DataAccess;
 using DomainObjects.Services.AuthenticationServices;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,6 +25,12 @@ namespace UI
             window.DataContext = new MainViewModel();
             window.Show();
             base.OnStartup(e);
+        }
+
+        private IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+
         }
     }
 }
