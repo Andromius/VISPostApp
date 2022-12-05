@@ -19,9 +19,11 @@ namespace UI.State.Authenticators
             {
                 return _currentUser;
             }
-            set
+            private set
             {
                 _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+                OnPropertyChanged(nameof(IsLoggedIn));
             } 
         }
         public bool IsLoggedIn => CurrentUser != null;
