@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UI.State.Navigators;
 using UI.ViewModels;
+using UI.ViewModels.Factories;
 
 namespace UI.Commands
 {
@@ -14,10 +15,12 @@ namespace UI.Commands
         public event EventHandler? CanExecuteChanged;
 
         private INavigator _navigator;
+        private readonly IUIViewModelAbstractFactory _viewModelFactory;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
+        public UpdateCurrentViewModelCommand(INavigator navigator, IUIViewModelAbstractFactory viewModelFactory)
         {
             _navigator = navigator;
+            _viewModelFactory = viewModelFactory;
         }
 
         public bool CanExecute(object? parameter)
@@ -30,20 +33,8 @@ namespace UI.Commands
             if(parameter is ViewType)
             {
                 ViewType viewType = (ViewType)parameter;
-                switch (viewType)
-                {
-                    case ViewType.Home:
-                        _navigator.CurrentViewModel = new HomeViewModel();
-                        break;
-                    case ViewType.Packages:
-                        _navigator.CurrentViewModel = new PackagesViewModel();
-                        break;
-                    //case ViewType.Login:
-                    //    _navigator.CurrentViewModel = new LoginViewModel();
-                    //    break;
-                    default:
-                        break;
-                }
+
+                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
         }
     }

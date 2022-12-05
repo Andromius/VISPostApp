@@ -29,7 +29,7 @@ namespace UI.Commands
 
         public void Execute(object? parameter)
         {
-            bool success = _authenticator.Login(_loginViewModel.Username, string.Empty);
+            bool success = _authenticator.Login(_loginViewModel.Username, parameter.ToString());
         }
     }
 }

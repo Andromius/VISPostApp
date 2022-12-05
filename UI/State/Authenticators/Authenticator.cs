@@ -5,13 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Models;
 
 namespace UI.State.Authenticators
 {
-    public class Authenticator : IAuthenticator
+    public class Authenticator : ObservableObject, IAuthenticator
     {
         private readonly IAuthenticationService _authenticationService;
-        public User CurrentUser { get; private set; }
+        private User _currentUser;
+        public User CurrentUser 
+        { 
+            get 
+            {
+                return _currentUser;
+            }
+            set
+            {
+                _currentUser = value;
+            } 
+        }
         public bool IsLoggedIn => CurrentUser != null;
         public Authenticator(IAuthenticationService authenticationService)
         {

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using UI.Commands;
 using UI.Models;
 using UI.ViewModels;
+using UI.ViewModels.Factories;
 
 namespace UI.State.Navigators
 {
@@ -27,7 +28,11 @@ namespace UI.State.Navigators
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentViewModelCommand { get; set; }
 
+        public Navigator(IUIViewModelAbstractFactory viewModelFactory)
+        {
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
+        }
     }
 }
