@@ -44,7 +44,11 @@ namespace UI
             services.AddSingleton<IUIViewModelAbstractFactory, UIViewModelAbstractFactory>();
             services.AddSingleton<IUIViewModelFactory<PackagesViewModel>, PackagesViewModelFactory>();
             services.AddSingleton<IUIViewModelFactory<HomeViewModel>, HomeViewModelFactory>();
-            services.AddSingleton<IUIViewModelFactory<LoginViewModel>, LoginViewModelFactory>();
+            
+            services.AddSingleton<IUIViewModelFactory<LoginViewModel>>((services) => 
+                new LoginViewModelFactory(services.GetRequiredService<IAuthenticator>(),
+                new ViewModelFactoryRenavigator<HomeViewModel>(services.GetRequiredService<INavigator>(), 
+                services.GetRequiredService<IUIViewModelFactory<HomeViewModel>>())));
 
             services.AddScoped<INavigator, Navigator>();
             services.AddScoped<IAuthenticator, Authenticator>();

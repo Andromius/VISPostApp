@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UI.ViewModels
+namespace UI.State.Navigators
 {
-    public class HomeViewModel : ViewModelBase
+    public interface IRenavigator
     {
-        public HomeViewModel()
-        {
-        }
+        void Renavigate();
     }
 }

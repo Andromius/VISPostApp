@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UI.State.Authenticators;
+using UI.State.Navigators;
 using UI.ViewModels;
+using UI.ViewModels.Factories;
 
 namespace UI.Commands
 {
@@ -13,11 +15,13 @@ namespace UI.Commands
     {
         private readonly LoginViewModel _loginViewModel;
         private readonly IAuthenticator _authenticator;
+        private readonly IRenavigator _renavigator;
 
-        public LoginCommand(LoginViewModel loginViewModel, IAuthenticator authenticator)
+        public LoginCommand(LoginViewModel loginViewModel, IAuthenticator authenticator, IRenavigator renavigator)
         {
             _loginViewModel = loginViewModel;
             _authenticator = authenticator;
+            _renavigator = renavigator;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -30,6 +34,11 @@ namespace UI.Commands
         public void Execute(object? parameter)
         {
             bool success = _authenticator.Login(_loginViewModel.Username, parameter.ToString());
+
+            if(success)
+            {
+                _renavigator.Renavigate();
+            }
         }
     }
 }

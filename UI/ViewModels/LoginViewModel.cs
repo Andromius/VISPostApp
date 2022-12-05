@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UI.Commands;
 using UI.State.Authenticators;
+using UI.State.Navigators;
 
 namespace UI.ViewModels
 {
@@ -25,9 +26,9 @@ namespace UI.ViewModels
             }
         }
         public ICommand LoginCommand { get; }
-        public LoginViewModel(IAuthenticator authenticator) 
+        public LoginViewModel(IAuthenticator authenticator, IRenavigator renavigator) 
         {
-            LoginCommand = new LoginCommand(this, authenticator);
+            LoginCommand = new LoginCommand(this, authenticator, renavigator);
         }
 
     }
