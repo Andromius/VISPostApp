@@ -12,6 +12,8 @@ namespace UI.State.Authenticators
         User CurrentUser { get; }
         bool IsLoggedIn { get; }
 
+        event Action StateChanged;
+
         bool Login(string username, string password);
         void Logout();
 

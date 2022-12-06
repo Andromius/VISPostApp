@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UI.State.Accounts;
 using UI.State.Authenticators;
 using UI.State.Navigators;
 using UI.ViewModels;
@@ -50,8 +51,9 @@ namespace UI
                 new ViewModelFactoryRenavigator<HomeViewModel>(services.GetRequiredService<INavigator>(), 
                 services.GetRequiredService<IUIViewModelFactory<HomeViewModel>>())));
 
-            services.AddScoped<INavigator, Navigator>();
-            services.AddScoped<IAuthenticator, Authenticator>();
+            services.AddSingleton<INavigator, Navigator>();
+            services.AddSingleton<IAuthenticator, Authenticator>();
+            services.AddSingleton<IUserStore, UserStore>();
             services.AddScoped<MainViewModel>();
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));

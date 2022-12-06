@@ -12,7 +12,7 @@ using UI.ViewModels.Factories;
 
 namespace UI.State.Navigators
 {
-    public class Navigator : ObservableObject, INavigator
+    public class Navigator : INavigator
     {
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -24,8 +24,10 @@ namespace UI.State.Navigators
             set
             {
                 _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                StateChanged?.Invoke();
             }
         }
+        
+        public event Action StateChanged;
     }
 }

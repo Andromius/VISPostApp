@@ -8,5 +8,9 @@ namespace UI.ViewModels
 {
     public class PackagesViewModel : ViewModelBase
     {
+        public PackagesViewModel()
+        {
+
+        }
     }
 }

@@ -6,30 +6,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UI.Models;
+using UI.State.Accounts;
 
 namespace UI.State.Authenticators
 {
-    public class Authenticator : ObservableObject, IAuthenticator
+    public class Authenticator : IAuthenticator
     {
         private readonly IAuthenticationService _authenticationService;
-        private User _currentUser;
+        private readonly IUserStore _userStore;
         public User CurrentUser 
         { 
             get 
             {
-                return _currentUser;
+                return _userStore.CurrentUser;
             }
             private set
             {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
-                OnPropertyChanged(nameof(IsLoggedIn));
+                _userStore.CurrentUser = value;
+                StateChanged?.Invoke();
             } 
         }
         public bool IsLoggedIn => CurrentUser != null;
-        public Authenticator(IAuthenticationService authenticationService)
+
+        public event Action StateChanged;
+        public Authenticator(IAuthenticationService authenticationService, IUserStore userStore)
         {
             _authenticationService = authenticationService;
+            _userStore = userStore;
         }
         public bool Login(string username, string password)
         {
