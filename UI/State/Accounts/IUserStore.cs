@@ -10,5 +10,6 @@ namespace UI.State.Accounts
     public interface IUserStore
     {
         User CurrentUser { get; set; }
+        event Action StateChanged;
     }
 }

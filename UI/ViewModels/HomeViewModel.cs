@@ -8,6 +8,7 @@ namespace UI.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+        public PackagesViewModel PackagesViewMode { get; }
         public HomeViewModel()
         {
         }

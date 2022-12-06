@@ -10,5 +10,6 @@ namespace DomainObjects.Services
     public interface IPackageDataMapper
     {
         public Package FindByCode(int code);
+        public List<Package> FindByCourierID(int id);
     }
 }

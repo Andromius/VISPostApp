@@ -93,7 +93,7 @@ namespace DataAccess.DataAccess
             dr.Close();
             command.Dispose();
             ConnectionManager.CloseConn();
-            return new List<Package>();
+            return packages;
         }
 
     }

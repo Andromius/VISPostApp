@@ -19,7 +19,7 @@ namespace DomainObjects.DomainObjects
             CourierID = courierID;
             AreaID = areaID;
             AssignedArea = null;
-            Packages = new List<Package>();
+            Packages = null;
         }
         public Courier(int userID, string firstName, string lastName, DateOnly dateHired, string login, string password, bool atWork, int courierID, Area area) : base(userID, firstName, lastName, dateHired, login, password, atWork)
         {
@@ -32,6 +32,13 @@ namespace DomainObjects.DomainObjects
         {
             p.Courier = this;
             Packages.Add(p);
+        }
+
+        public List<Package> GetPackages(IPackageDataMapper packageDataMapper) 
+        {
+            if (Packages is null)
+                return Packages = packageDataMapper.FindByCourierID(CourierID.Value);
+            return Packages;
         }
 
         public Area GetArea(IAreaDataMapper areaDataMapper)
