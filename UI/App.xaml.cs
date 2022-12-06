@@ -12,6 +12,7 @@ using System.Windows;
 using UI.State.Accounts;
 using UI.State.Authenticators;
 using UI.State.Navigators;
+using UI.State.Packages;
 using UI.ViewModels;
 using UI.ViewModels.Factories;
 
@@ -38,19 +39,22 @@ namespace UI
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<UserDataMapper>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserDataMapper, UserDataMapper>();
 
             services.AddSingleton<IUIViewModelAbstractFactory, UIViewModelAbstractFactory>();
-            services.AddSingleton<IUIViewModelFactory<PackagesViewModel>, PackagesViewModelFactory>();
             services.AddSingleton<IUIViewModelFactory<HomeViewModel>, HomeViewModelFactory>();
-            
+
+            services.AddSingleton<IUIViewModelFactory<PackagesViewModel>, PackagesViewModelFactory>();
+
             services.AddSingleton<IUIViewModelFactory<LoginViewModel>>((services) => 
                 new LoginViewModelFactory(services.GetRequiredService<IAuthenticator>(),
                 new ViewModelFactoryRenavigator<HomeViewModel>(services.GetRequiredService<INavigator>(), 
                 services.GetRequiredService<IUIViewModelFactory<HomeViewModel>>())));
 
+            services.AddSingleton<PackagesSummaryViewModel>();
+
+            services.AddSingleton<PackageStore>();
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<IUserStore, UserStore>();

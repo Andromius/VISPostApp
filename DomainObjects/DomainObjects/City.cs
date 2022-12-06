@@ -31,14 +31,6 @@ namespace DomainObjects.DomainObjects
             Area = null;
         }
 
-        //public City(int cityID, string name, Area area)
-        //{
-        //    CityID = cityID;
-        //    Name = name;
-        //    AreaID = area.AreaID;
-        //    Area = area;
-        //}
-
         public Area GetArea(IAreaDataMapper areaDataMapper)
         {
             if (Area is null)

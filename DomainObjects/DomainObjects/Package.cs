@@ -144,7 +144,7 @@ namespace DomainObjects.DomainObjects
                     stringBuilder.Append(item.Name).Append(" ");
                 }
             }
-            stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.FirstName : "null ");
+            stringBuilder.Append(Address is null ? $"\n\tAddress ID: {AddressID}" : $"\n\tAddress: {Address}").Append("\n\tCourier ID: ").Append(Courier is not null ? Courier.FirstName : CourierID);
             return stringBuilder.ToString();
         }
     }

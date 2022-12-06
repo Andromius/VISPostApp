@@ -11,18 +11,9 @@ namespace UI.ViewModels
 {
     public class PackagesViewModel : ViewModelBase
     {
-        private readonly PackageStore _packageStore;
-        public List<Package> Packages => _packageStore.Packages;
-        public PackagesViewModel(PackageStore packageStore)
+        public PackagesViewModel()
         {
-            _packageStore = packageStore;
-
-            _packageStore.StateChanged += PackageStore_StateChanged;
         }
 
-        private void PackageStore_StateChanged()
-        {
-            OnPropertyChanged(nameof(Packages));
-        }
     }
 }

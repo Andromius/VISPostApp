@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UI.Models;
 using UI.State.Accounts;
 
 namespace UI.State.Authenticators
@@ -41,8 +40,9 @@ namespace UI.State.Authenticators
             {
                 CurrentUser = _authenticationService.Login(username, password);
             }
-            catch(Exception) 
-            { 
+            catch(Exception e) 
+            {
+                Console.WriteLine(e.Message);
                 success = false;
             }
             return success;

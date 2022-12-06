@@ -79,14 +79,34 @@ namespace DataAccess.DataAccess
             command.Parameters.Add(new SqlParameter("@id", $"{id}"));
             List<Package> packages = new List<Package>();
             SqlDataReader dr = command.ExecuteReader();
+            Package pckg = null;
             while (dr.Read())
             {
-                Package pckg = new Package(
-                    (int)dr["package_code"],
-                    (double)dr["weight"],
-                    DateOnly.FromDateTime((DateTime)dr["date_imported"]),
-                    new AddressDataMapper().FindByID((int)dr["address_id"])
-                );
+                DateOnly? dateDispacthed;
+                if (dr.IsDBNull(3))
+                    dateDispacthed = null;
+                else
+                    dateDispacthed = DateOnly.FromDateTime((DateTime)dr["date_dispatched"]);
+                EDispatchStatus? dispatchStatus;
+                switch ((string)dr["dispatch_status"])
+                {
+                    case "delivered":
+                        dispatchStatus = EDispatchStatus.Delivered; break;
+                    case "ndelivered":
+                        dispatchStatus = EDispatchStatus.NDelivered; break;
+                    case "dispatched":
+                        dispatchStatus = EDispatchStatus.Dispatched; break;
+                    case "returned":
+                        dispatchStatus = EDispatchStatus.Returned; break;
+                    default:
+                        dispatchStatus = null; break;
+                }
+                int? courierID;
+                if (dr.IsDBNull(6))
+                    courierID = null;
+                else
+                    courierID = (int)dr["courier_id"];
+                pckg = new Package((int)dr["package_code"], Convert.ToDouble((decimal)dr["weight"]), DateOnly.FromDateTime((DateTime)dr["date_imported"]), dateDispacthed, dispatchStatus, (int)dr["address_id"], courierID);
                 packages.Add(pckg);
             }
 

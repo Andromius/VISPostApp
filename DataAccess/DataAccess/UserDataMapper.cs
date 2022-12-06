@@ -44,9 +44,9 @@ namespace DataAccess.DataAccess
                 }
             }
             dr.Close();
-            if (u is Courier courier)
+            if (u is Courier c)
             {
-                u = new CourierDataMapper().FindByUserID(courier);
+                u = new CourierDataMapper().FindByUserID(c);
             }
             command.Dispose();
             ConnectionManager.CloseConn();
@@ -90,13 +90,13 @@ namespace DataAccess.DataAccess
             ConnectionManager.CloseConn();
             return u;
         }
-        //public bool Update(User user)
-        //{
-
-        //}
-        //public bool Create(User user)
-        //{
-
-        //}
+        public bool Update(User user)
+        {
+            throw new NotImplementedException();
+        }
+        public bool Create(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
