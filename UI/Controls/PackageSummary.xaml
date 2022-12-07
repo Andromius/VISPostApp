@@ -7,9 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox x:Name="listbox" ItemsSource="{Binding Packages}" Margin="10,10,335,188"/>
-        <Button HorizontalAlignment="Left" Margin="497,65,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click">Calculate total weight</Button>
-        <Button HorizontalAlignment="Left" Margin="497,150,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click1">Count with sp.ft.</Button>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" x:Name="listbox" ItemsSource="{Binding Packages}" Width="300" Height="400"/>
+        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click">Calculate total weight</Button>
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click1">Count with sp.ft.</Button>
+        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click_2">Calculate time since hired</Button>
     </Grid>
 </UserControl>

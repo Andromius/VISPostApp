@@ -40,9 +40,8 @@ namespace UI.State.Authenticators
             {
                 CurrentUser = _authenticationService.Login(username, password);
             }
-            catch(Exception e) 
+            catch(Exception) 
             {
-                Console.WriteLine(e.Message);
                 success = false;
             }
             return success;

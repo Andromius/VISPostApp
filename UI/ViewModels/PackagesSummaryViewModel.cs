@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using UI.Commands;
+using UI.State.Accounts;
 using UI.State.Packages;
 
 namespace UI.ViewModels
@@ -15,10 +18,13 @@ namespace UI.ViewModels
         private ObservableCollection<Package> _packages;
         public List<Package> Packages => _packageStore.Packages;
 
-        public PackagesSummaryViewModel(PackageStore packageStore)
+        public ICommand CountTimeSinceHired { get; }
+
+        public PackagesSummaryViewModel(PackageStore packageStore, IUserStore userStore)
         {
             _packageStore = packageStore;
             _packages = new ObservableCollection<Package>();
+            CountTimeSinceHired = new CountTimeSinceHired(this, userStore);
 
             _packageStore.StateChanged += PackageStore_StateChanged;
         }

@@ -50,6 +50,7 @@ namespace UI.Controls
                     AddSelectedPackageCommand.Execute(_selectedObject);
                 }
             }
+            MessageBox.Show("Added package");
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

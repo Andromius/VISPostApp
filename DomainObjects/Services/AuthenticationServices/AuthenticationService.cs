@@ -21,9 +21,15 @@ namespace DomainObjects.Services.AuthenticationServices
 
         public User Login(string username, string password)
         {
+            if(string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username)) 
+                throw new Exception();
+
             User u = _userDataMapper.FindByLogin(username);
+            if(u == null)
+                throw new Exception();
+
             PasswordVerificationResult passResult = _passwordHasher.VerifyHashedPassword(u.Password, password);
-            if(passResult != PasswordVerificationResult.Success)
+            if (passResult != PasswordVerificationResult.Success)
             {
                 throw new Exception();
             }

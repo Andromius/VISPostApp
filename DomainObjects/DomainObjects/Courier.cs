@@ -30,9 +30,12 @@ namespace DomainObjects.DomainObjects
         }
         public void AddPackage(Package p, IPackageDataMapper packageDataMapper)
         {
-            p.CourierID = CourierID;
-            packageDataMapper.Update(p);
-            Packages.Add(p);
+            if (!Packages.Contains(p))
+            {
+                p.CourierID = CourierID;
+                packageDataMapper.Update(p);
+                Packages.Add(p);
+            }
         }
 
         public List<Package> GetPackages(IPackageDataMapper packageDataMapper) 

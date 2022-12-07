@@ -27,9 +27,6 @@ namespace UI
         protected override void OnStartup(StartupEventArgs e)
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
-            //IAuthenticationService authenticationService = serviceProvider.GetService<IAuthenticationService>();
-            //IAuthenticationService authentiCationService = new AuthenticationService(new UserDataMapper());
-            //authentiCationService.Login("MaTl2011", "JsemTheBet");
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 

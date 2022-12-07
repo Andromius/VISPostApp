@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UI.Commands;
 
 namespace UI.Controls
 {
@@ -24,6 +25,15 @@ namespace UI.Controls
     /// </summary>
     public partial class PackageSummary : UserControl
     {
+        public ICommand CountTimeSinceHired
+        {
+            get { return (ICommand)GetValue(CountTimeSinceHiredProperty); }
+            set { SetValue(CountTimeSinceHiredProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LoginCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CountTimeSinceHiredProperty =
+            DependencyProperty.Register("CountTimeSinceHired", typeof(ICommand), typeof(PackageSummary), new PropertyMetadata(null));
         public PackageSummary()
         {
             InitializeComponent();
@@ -42,6 +52,7 @@ namespace UI.Controls
             double result = countService.CountWeight(packages);
             string toPrint = $"The weight of currently dispatched packages is {result} kg";
             TextFile.Write(toPrint);
+            MessageBox.Show("Succesfuly wrote to file");
         }
 
         private void Button_Click1(object sender, RoutedEventArgs e)
@@ -57,6 +68,15 @@ namespace UI.Controls
             int result = countService.CountSpFt(packages, new SpecialFeaturesDataMapper());
             string toPrint = $"The amount of currently dispatched packages with special features is {result}";
             TextFile.Write(toPrint);
+            MessageBox.Show("Succesfuly wrote to file");
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (CountTimeSinceHired != null)
+            {
+                CountTimeSinceHired.Execute(this);
+            }
         }
     }
 }

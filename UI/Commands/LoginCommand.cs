@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using UI.State.Authenticators;
 using UI.State.Navigators;
@@ -38,6 +39,10 @@ namespace UI.Commands
             if(success)
             {
                 _renavigator.Renavigate();
+            }
+            else
+            {
+                MessageBox.Show("Unable to log in, please try again", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

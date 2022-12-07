@@ -33,5 +33,11 @@ namespace DomainObjects.Services.CountServices
             }
             return count;
         }
+
+        public int CountDaysSinceHired(User u)
+        {
+            DateTime dt = u.DateHired.ToDateTime(new TimeOnly());
+            return (DateTime.Now - dt).Days;          
+        }
     }
 }
