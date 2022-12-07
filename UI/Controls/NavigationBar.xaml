@@ -40,8 +40,6 @@
             <RadioButton Grid.Column="1" Content="Packages" IsChecked="{Binding Navigator.CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:PackagesViewModel}}"
                          Command="{Binding UpdateCurrentViewModelCommand}" 
                          CommandParameter="{x:Static nav:ViewType.Packages}"/>
-            <RadioButton Grid.Column="2" Content="ChangePckgStatus" IsEnabled="False"/>
-            <RadioButton Grid.Column="3" Content="Idk"/>
         </Grid>
 
     </Grid>

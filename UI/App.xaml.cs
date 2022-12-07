@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UI.Controls;
 using UI.State.Accounts;
 using UI.State.Authenticators;
 using UI.State.Navigators;
@@ -53,7 +54,11 @@ namespace UI
                 services.GetRequiredService<IUIViewModelFactory<HomeViewModel>>())));
 
             services.AddSingleton<PackagesSummaryViewModel>();
+            services.AddSingleton<PackagesNoCourierViewModel>();
 
+            services.AddSingleton<PackageWithoutCourier>();
+
+            services.AddSingleton<NoCourierPackageStore>();
             services.AddSingleton<PackageStore>();
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();

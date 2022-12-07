@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainObjects.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,9 @@ namespace DataAccess.Files
         public static void Write(string input)
         {
             DateTime dateTime = DateTime.Now;
-            
-            using (FileStream fs = new FileStream("out"+dateTime.ToString(), FileMode.Create))
+            string curr = dateTime.ToString().Replace(' ', '_');
+            curr = curr.Replace(':', '_');
+            using (FileStream fs = new FileStream("out"+curr+".txt", FileMode.Create))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
                 {

@@ -25,7 +25,7 @@ namespace DomainObjects.DomainObjects
         public List<SpecialFeature>? SpecialFeatures { get; private set; }
         private int AddressID { get; set; }
         private Address? Address { get; set; }
-        private int? CourierID { get; set; }
+        public int? CourierID { get; set; }
         public Courier? Courier { private get; set; }
 
         public Package(int packageCode, double weight, DateOnly dateImported, Address address)

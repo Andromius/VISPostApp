@@ -28,9 +28,10 @@ namespace DomainObjects.DomainObjects
             AssignedArea = area;
             Packages = new List<Package>();
         }
-        public void AddPackage(Package p)
+        public void AddPackage(Package p, IPackageDataMapper packageDataMapper)
         {
-            p.Courier = this;
+            p.CourierID = CourierID;
+            packageDataMapper.Update(p);
             Packages.Add(p);
         }
 

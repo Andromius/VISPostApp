@@ -11,5 +11,6 @@ namespace DomainObjects.Services
     {
         public Package FindByCode(int code);
         public List<Package> FindByCourierID(int id);
+        public void Update(Package p);
     }
 }

@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:UI.Controls"
+             xmlns:local="clr-namespace:UI.Controls" xmlns:viewmodels="clr-namespace:UI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:PackagesNoCourierViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="28,19,350,172">
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="582,66,0,0" VerticalAlignment="Top" Width="20" Height="20"/>
+    <Grid>
+
+        <ListBox x:Name="listbox" ItemsSource="{Binding Packages}" SelectionChanged="ListBox_SelectionChanged" Width="300" Height="300" Margin="0 0 400 100"/>
+        <Button Height="50" Width="150" Click="Button_Click" Margin="100 0 0 250">Add selected package</Button>
 
     </Grid>
 </UserControl>

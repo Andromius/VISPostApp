@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:UI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0,225,365,0">
-        <ListBox ItemsSource="{Binding Packages}" Margin="25,-208,-25,113"/>
+    <Grid>
+        <ListBox x:Name="listbox" ItemsSource="{Binding Packages}" Margin="10,10,335,188"/>
+        <Button HorizontalAlignment="Left" Margin="497,65,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click">Calculate total weight</Button>
+        <Button HorizontalAlignment="Left" Margin="497,150,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click1">Count with sp.ft.</Button>
 
     </Grid>
 </UserControl>
